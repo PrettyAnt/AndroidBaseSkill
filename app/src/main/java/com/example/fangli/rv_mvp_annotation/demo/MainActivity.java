@@ -60,7 +60,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         btn_load_data = (Button) findViewById(R.id.btn_back);
         tv_show_msg = (TextView) findViewById(R.id.tv_show_msg);
         rv_recycle = (RecyclerView) findViewById(R.id.rv_country_recycle);
-        //设置布局管理器
+        //设置布局管理器  spanCount==1时，GridLayoutManager布局管理器就类似于LinearLayoutManager
         final GridLayoutManager gridLayoutManager =
                 new GridLayoutManager(this, 1, LinearLayoutManager.VERTICAL, false);
 //        gridLayoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
@@ -83,7 +83,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 //
 //                        }
 //                        getData(pageIndex);
-
                     }
 
 
