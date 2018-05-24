@@ -72,12 +72,13 @@ public class TestActivity1 extends AppCompatActivity implements IView, View.OnCl
 //                finish();
                 MyDialogUtils.CommDialog(this,
                         "提示",
-                        "这个是提示哦",
+                        "\"确定\"退出当前界面",
                         "取消",
                         new View.OnClickListener() {
                             @Override
                             public void onClick(View v) {
-                                finish();
+//                                finish();
+                                MyDialogUtils.commDialog.dismiss();
                             }
                         }, "确定",
                         new View.OnClickListener() {
@@ -89,7 +90,6 @@ public class TestActivity1 extends AppCompatActivity implements IView, View.OnCl
                             @Override
                             public boolean onKey(DialogInterface dialog, int keyCode, KeyEvent event) {
                                 if (event.getAction() == KeyEvent.ACTION_DOWN) {
-                                    //通知坐席
                                     Toast.makeText(TestActivity1.this, "退出111111", Toast.LENGTH_SHORT).show();
                                     return true;
                                 } else {

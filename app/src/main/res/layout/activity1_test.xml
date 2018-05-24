@@ -11,7 +11,7 @@
         android:layout_gravity="center"/>
     <Button
         android:id="@+id/btn_back"
-        android:text="返回"
+        android:text="showDialog"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
     <Button
