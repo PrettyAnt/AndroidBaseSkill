@@ -43,7 +43,7 @@ public class DataAdapter extends RecyclerView.Adapter<DataViewHolder> {
 
     @Override
     public void onBindViewHolder(DataViewHolder holder, int position) {
-        holder.tv_item.setText(mdata.get(position));
+        holder.tv_item.setText("$"+(position+1)+". "+mdata.get(position));
     }
 
     @Override

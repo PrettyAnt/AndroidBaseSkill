@@ -33,10 +33,18 @@ import java.util.List;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener, ItemOnClickListener {
 
+    public static int pageIndex = 0;
     private Button btn_load_data;
     private TextView tv_show_msg;
     private RecyclerView rv_recycle;
     private DataAdapter dataAdapter;
+    private int anInt;
+    private boolean memberPagIsEnd = false,
+            isLoading = false,//是否滑到最后一个
+            isRefresh = false;//是否正在刷新
+    private List<String> data = new ArrayList<>();
+    private List<String> data2 = new ArrayList<>();
+    private List<List<String>> dataTotal = new ArrayList<>();
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -48,17 +56,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     }
 
-    public static int pageIndex = 0;
-    private boolean memberPagIsEnd = false,
-            isLoading = false,//是否滑到最后一个
-            isRefresh = false;//是否正在刷新
-
     private void initView() {
         btn_load_data = (Button) findViewById(R.id.btn_back);
         tv_show_msg = (TextView) findViewById(R.id.tv_show_msg);
         rv_recycle = (RecyclerView) findViewById(R.id.rv_country_recycle);
         //设置布局管理器
-        final GridLayoutManager gridLayoutManager = new GridLayoutManager(this, 1, LinearLayoutManager.VERTICAL, false);
+        final GridLayoutManager gridLayoutManager =
+                new GridLayoutManager(this, 1, LinearLayoutManager.VERTICAL, false);
 //        gridLayoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
         rv_recycle.setLayoutManager(gridLayoutManager);
         dataAdapter = new DataAdapter(data, this);
@@ -108,16 +112,33 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         btn_load_data.setOnClickListener(this);
     }
 
-    private List<String> data = new ArrayList<>();
-    private List<String> data2 = new ArrayList<>();
-    private List<List<String>> dataTotal = new ArrayList<>();
-
     private void initData() {
         data.clear();
         for (int i = 0; i < 60; i++) {
-            if (i <= 25||i>31&&i<=57) {
-                data.add("跳转到： Activity " + (char) (65 + i));
-            } else  {
+            if (i <= 25 || i > 31 && i <= 57) {
+                anInt = 65 + i;
+                switch (anInt) {
+                    case 65:
+                        data.add("自定义dialog、mvpDemo");
+                        break;
+                    case 66:
+                        data.add("mvpDemo");
+                        break;
+                    case 67:
+                        data.add("Java注解");
+                        break;
+                    case 68:
+                        data.add("ExpandableRecyclerView测试，待优化");
+                        break;
+                    case 69:
+                        data.add("日历选择器");
+                        break;
+                    default:
+                        data.add("跳转到: Activity " + (char) anInt);
+                        break;
+                }
+
+            } else {
                 data.add("测试数据" + i);
             }
 //            if (i < 4) {
@@ -174,7 +195,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 DialogHelper.getInstance().initDateDialog(this, new DialogHelper.OnDatePickedListener() {
                     @Override
                     public void onDatePicked(DatePicker view, int year, int month, int dayOfMonth) {
-                     tv_show_msg.setText(year + "-" + (month + 1) + "-" + dayOfMonth);
+                        tv_show_msg.setText(year + "-" + (month + 1) + "-" + dayOfMonth);
                     }
                 });
                 break;
