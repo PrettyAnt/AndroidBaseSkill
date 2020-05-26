@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-          package="com.example.fangli.rv_mvp_annotation">
+          package="com.example.prettyant">
 
     <application
         android:allowBackup="true"
@@ -9,17 +9,15 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".demo.MainActivity">
+        <activity android:name=".mulrecyclerview.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
 
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
-        <activity android:name=".demo1.TestActivity1"/>
-        <activity android:name=".demo2.TestActivity2"/>
-        <activity android:name=".demo3.TestActivity3"/>
-        <activity android:name=".demo4.TestActivity4"/>
+        <activity android:name="com.example.prettyant.demo3.TestActivity3"/>
+        <activity android:name="com.example.prettyant.demo4.TestActivity4"/>
     </application>
 
 </manifest>

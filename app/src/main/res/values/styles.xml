@@ -18,19 +18,19 @@
         <item name="android:windowAnimationStyle">@android:style/Animation.Dialog</item>
         <item name="android:backgroundDimEnabled">true</item>
     </style>
-    <!-- popup window 显示消失动画-->
-    <style name="PopWindowAnimStyle">
-        <item name="android:windowShowAnimation">@anim/dialog_enter</item>
-        <!-- 指定显示的动画xml  -->
-        <item name="android:windowHideAnimation">@anim/dialog_exit</item>
-        <!-- 指定消失的动画xml  -->
-    </style>
-    <style name="Theme_Transparent" parent="Base.Theme.AppCompat.Light.Dialog">
-        <item name="android:windowIsTranslucent">true</item>
-        <item name="android:windowBackground">@android:color/transparent</item>
-        <item name="android:windowContentOverlay">@null</item>
-        <item name="android:windowNoTitle">true</item>
-    </style>
+<!--    &lt;!&ndash; popup window 显示消失动画&ndash;&gt;-->
+<!--    <style name="PopWindowAnimStyle">-->
+<!--        <item name="android:windowShowAnimation">@anim/dialog_enter</item>-->
+<!--        &lt;!&ndash; 指定显示的动画xml  &ndash;&gt;-->
+<!--        <item name="android:windowHideAnimation">@anim/dialog_exit</item>-->
+<!--        &lt;!&ndash; 指定消失的动画xml  &ndash;&gt;-->
+<!--    </style>-->
+<!--    <style name="Theme_Transparent" parent="Base.Theme.AppCompat.Light.Dialog">-->
+<!--        <item name="android:windowIsTranslucent">true</item>-->
+<!--        <item name="android:windowBackground">@android:color/transparent</item>-->
+<!--        <item name="android:windowContentOverlay">@null</item>-->
+<!--        <item name="android:windowNoTitle">true</item>-->
+<!--    </style>-->
     <!--日期选择的style-->
 
     <style name="BottomDialogWindowAnim" mce_bogus="1" parent="android:Animation">
