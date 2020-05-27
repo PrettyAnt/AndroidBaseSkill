@@ -7,6 +7,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
@@ -60,8 +61,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private void initEvent() {
         btn_load_data.setOnClickListener(this);
         //设置布局管理器  spanCount==1时，GridLayoutManager布局管理器就类似于LinearLayoutManager
-        GridLayoutManager gridLayoutManager = new GridLayoutManager(this, 1, LinearLayoutManager.VERTICAL, false);
-        rv_recycle.setLayoutManager(gridLayoutManager);
+        GridLayoutManager manager = new GridLayoutManager(this, 1, LinearLayoutManager.VERTICAL, false);
+//        StaggeredGridLayoutManager manager = new StaggeredGridLayoutManager(4, StaggeredGridLayoutManager.VERTICAL); //流布局
+        rv_recycle.setLayoutManager(manager);
         dataAdapter = new DataAdapter(newsModels, this);
         rv_recycle.setAdapter(dataAdapter);
         dataAdapter.setItemOnClickListener(this);
@@ -88,7 +90,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     @Override
     public void onItemClickListener(View view, int position) {
-        Toast.makeText(MainActivity.this,newsModels.get(position).getTextContent() , Toast.LENGTH_SHORT).show();
+        Toast.makeText(MainActivity.this,newsModels.get(position).getTextContent()+"--->>"+position , Toast.LENGTH_SHORT).show();
         switch (position) {
             case 0:
                 startActivity(new Intent(this, MvpStrategyActivity.class));//跳转到 自定义dialog、mvp的简单实例

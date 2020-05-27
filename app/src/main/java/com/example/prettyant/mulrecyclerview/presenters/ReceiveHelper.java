@@ -49,11 +49,11 @@ public class ReceiveHelper {
         addDatas();
 
         for (int i = 0; i < 60; i++) {
-            switch (i % 4) {
+            switch (i % 5) {
                 case 0:
                     NewsModel newsModel = new NewsModel();
                     newsModel.setNewsType(0);//富文本消息，文字、图片、视频都有
-                    newsModel.setTextContent("这是富文本消息，你想要的内容这里都有-->>> " + i);
+                    newsModel.setTextContent("这是富文本消息，你想要的内容这里都有");
                     newsModel.setImgUrl("http://prettyant.com/images/wife/lp_a.png");
                     newsModel.setVideoUrl("这是视频模块");
                     newsModels.add(newsModel);
@@ -61,13 +61,13 @@ public class ReceiveHelper {
                 case 1:
                     NewsModel newsModel1 = new NewsModel();
                     newsModel1.setNewsType(1);//只有文字
-                    newsModel1.setTextContent("这是单纯的文字消息，纯文字纯文字纯文字纯文字纯文字-->>> " + i);
+                    newsModel1.setTextContent("这是单纯的文字消息，纯文字纯文字纯文字纯文字纯文字");
                     newsModels.add(newsModel1);
                     break;
                 case 2:
                     NewsModel newsModel2 = new NewsModel();
                     newsModel2.setNewsType(2);//文字和图片
-                    newsModel2.setTextContent("文字和图片-->>> " + i);
+                    newsModel2.setTextContent("文字和图片 文字和图片 文字和图片 文字和图片");
                     newsModel2.setImgUrl("http://prettyant.com/images/wife/a.png");
                     newsModels.add(newsModel2);
                     break;
@@ -80,13 +80,13 @@ public class ReceiveHelper {
                 case 4:
                     NewsModel newsModel4 = new NewsModel();
                     newsModel4.setNewsType(4);//单纯的图片消息
-                    newsModel4.setVideoUrl("这是视频模块" + i);
+                    newsModel4.setVideoUrl("这是视频模块");
                     newsModels.add(newsModel4);
                     break;
                 default:
                     NewsModel newsModel5 = new NewsModel();
                     newsModel5.setNewsType(1);//富文本消息，文字、图片、视频都有
-                    newsModel5.setTextContent("这是单纯的文字消息，纯文字纯文字纯文字纯文字纯文字-->>> " + i);
+                    newsModel5.setTextContent("这是单纯的文字消息，纯文字纯文字纯文字纯文字纯文字 ");
                     newsModels.add(newsModel5);
                     break;
             }

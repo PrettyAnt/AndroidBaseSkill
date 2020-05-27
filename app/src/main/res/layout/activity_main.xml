@@ -28,6 +28,8 @@
         <android.support.v7.widget.RecyclerView
             android:id="@+id/rv_country_recycle"
             android:layout_width="match_parent"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
             android:layout_height="0dp"
             android:layout_gravity="center"
             android:layout_weight="9"/>
