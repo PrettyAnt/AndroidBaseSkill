@@ -1,4 +1,4 @@
-package com.example.prettyant.mulrecyclerview.holder;
+package com.example.prettyant.mulrecyclerview.ui.holder;
 
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -14,24 +14,20 @@ import com.example.prettyant.mulrecyclerview.ItemOnClickListener;
  * Author'github https://github.com/PrettyAnt
  */
 
-public class DataViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+public class BaseViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
     private ItemOnClickListener itemOnClickListener;
-    public  TextView            tv_item;
 
-    public DataViewHolder(View itemView, ItemOnClickListener itemOnClickListener) {
-        super(itemView);
+    public BaseViewHolder(View itemViewr, ItemOnClickListener itemOnClickListener) {
+        super(itemViewr);
         this.itemOnClickListener = itemOnClickListener;
-        tv_item = itemView.findViewById(R.id.tv_item);
-        tv_item.setOnClickListener(this);
+        itemViewr.setOnClickListener(this);
     }
-
 
     @Override
     public void onClick(View v) {
         if (itemOnClickListener != null) {
-            itemOnClickListener.onItemClickListener(tv_item,getLayoutPosition());
+            itemOnClickListener.onItemClickListener(v, getLayoutPosition());
         }
-        Log.i("ttt", "当前点击的为： "+((TextView) v).getText().toString());
     }
 }

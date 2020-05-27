@@ -1,4 +1,4 @@
-package com.example.prettyant.mulrecyclerview;
+package com.example.prettyant.mulrecyclerview.ui;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -16,7 +16,11 @@ import android.widget.Toast;
 import com.example.annointroduction.AnnotationActivity;
 import com.example.mvpstrategy.MvpStrategyActivity;
 import com.example.prettyant.R;
-import com.example.prettyant.mulrecyclerview.adapter.DataAdapter;
+import com.example.prettyant.mulrecyclerview.ItemOnClickListener;
+import com.example.prettyant.mulrecyclerview.model.NewsModel;
+import com.example.prettyant.mulrecyclerview.presenters.ReceiveHelper;
+import com.example.prettyant.mulrecyclerview.presenters.iview.OnLoadImp;
+import com.example.prettyant.mulrecyclerview.ui.adapter.DataAdapter;
 import com.example.prettyant.util.DialogHelper;
 
 import java.util.ArrayList;
@@ -28,32 +32,37 @@ import java.util.List;
  * Author'github https://github.com/PrettyAnt
  */
 
-public class MainActivity extends AppCompatActivity implements View.OnClickListener, ItemOnClickListener {
+public class MainActivity extends AppCompatActivity implements View.OnClickListener, ItemOnClickListener, OnLoadImp {
 
     private Button       btn_load_data;
     private TextView     tv_show_msg;
     private RecyclerView rv_recycle;
     private DataAdapter  dataAdapter;
-    private List<String> data = new ArrayList<>();
+    private List<NewsModel> newsModels=new ArrayList<>();
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        initData();
         initView();
         initEvent();
+        initData();
     }
 
     private void initView() {
         btn_load_data = findViewById(R.id.btn_back);
         tv_show_msg = findViewById(R.id.tv_show_msg);
         rv_recycle = findViewById(R.id.rv_country_recycle);
+
+
+    }
+
+    private void initEvent() {
+        btn_load_data.setOnClickListener(this);
         //设置布局管理器  spanCount==1时，GridLayoutManager布局管理器就类似于LinearLayoutManager
-        final GridLayoutManager gridLayoutManager =
-                new GridLayoutManager(this, 1, LinearLayoutManager.VERTICAL, false);
+        GridLayoutManager gridLayoutManager = new GridLayoutManager(this, 1, LinearLayoutManager.VERTICAL, false);
         rv_recycle.setLayoutManager(gridLayoutManager);
-        dataAdapter = new DataAdapter(data, this);
+        dataAdapter = new DataAdapter(newsModels, this);
         rv_recycle.setAdapter(dataAdapter);
         dataAdapter.setItemOnClickListener(this);
         rv_recycle.addOnScrollListener(new RecyclerView.OnScrollListener() {
@@ -62,21 +71,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 super.onScrolled(recyclerView, dx, dy);
             }
         });
-
-    }
-
-    private void initEvent() {
-        btn_load_data.setOnClickListener(this);
     }
 
     private void initData() {
-        data.clear();
-        data.add("自定义dialog、mvp原理详解");
-        data.add("Java注解、反射");
-        data.add("日历选择器");
-        for (int i = 0; i < 60; i++) {
-            data.add("测试数据" + i);
-        }
+        ReceiveHelper.getInstance().loading(this);
     }
 
     @Override
@@ -90,13 +88,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     @Override
     public void onItemClickListener(View view, int position) {
-        Toast.makeText(MainActivity.this, ((TextView) view).getText().toString(), Toast.LENGTH_SHORT).show();
+        Toast.makeText(MainActivity.this,newsModels.get(position).getTextContent() , Toast.LENGTH_SHORT).show();
         switch (position) {
             case 0:
                 startActivity(new Intent(this, MvpStrategyActivity.class));//跳转到 自定义dialog、mvp的简单实例
                 break;
             case 1:
-                startActivity(new Intent(this, AnnotationActivity.class));
+                startActivity(new Intent(this, AnnotationActivity.class));//注解原理
                 break;
             case 2:
                 DialogHelper.getInstance().initDateDialog(this, new DialogHelper.OnDatePickedListener() {
@@ -113,5 +111,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
                 break;
         }
+    }
+
+    @Override
+    public void onReceive(ArrayList<NewsModel> newsModels) {
+        this.newsModels.clear();
+        this.newsModels.addAll(newsModels);
+        dataAdapter.notifyDataSetChanged();
     }
 }

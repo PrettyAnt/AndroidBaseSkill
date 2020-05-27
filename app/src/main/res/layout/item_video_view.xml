@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:background="@drawable/shape_item_background"
+    android:gravity="center"
+    android:layout_gravity="center_horizontal"
+    android:layout_marginTop="10dp"
+    android:layout_marginBottom="10dp"
+    android:orientation="vertical">
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="10dp"
+        android:layout_gravity="center"
+        android:text="纯视频消息"
+        android:textSize="@dimen/dimen_item_text"
+        android:textColor="@color/colorRead" />
+
+
+    <TextView
+        android:id="@+id/tv_item_video"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="20dp"
+        android:text="视频消息" />
+</LinearLayout>

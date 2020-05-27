@@ -32,3 +32,6 @@ app/app.iml
 app/build/
 app/libs/
 build/
+*.iml
+.iml
+
