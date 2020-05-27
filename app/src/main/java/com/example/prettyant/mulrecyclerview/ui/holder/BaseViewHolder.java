@@ -1,11 +1,9 @@
 package com.example.prettyant.mulrecyclerview.ui.holder;
 
-import android.support.v7.widget.RecyclerView;
-import android.util.Log;
-import android.view.View;
-import android.widget.TextView;
+import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.prettyant.R;
+import android.view.View;
+
 import com.example.prettyant.mulrecyclerview.ItemOnClickListener;
 
 /**

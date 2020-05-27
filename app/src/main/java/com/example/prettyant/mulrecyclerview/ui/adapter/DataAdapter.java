@@ -1,7 +1,7 @@
 package com.example.prettyant.mulrecyclerview.ui.adapter;
 
 import android.content.Context;
-import android.support.v7.widget.RecyclerView;
+import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
@@ -46,8 +46,10 @@ public class DataAdapter extends RecyclerView.Adapter<BaseViewHolder> {
 
     @Override
     public int getItemViewType(int position) {
-
-        return newsModels.get(position).getNewsType();
+        if (newsModels.size() > 0) {
+            return newsModels.get(position).getNewsType();
+        }
+        return super.getItemViewType(position);
     }
 
     @Override
