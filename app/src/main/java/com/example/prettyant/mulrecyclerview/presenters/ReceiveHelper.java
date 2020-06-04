@@ -44,6 +44,9 @@ public class ReceiveHelper {
             addDatas();
             getMulDatas();
         } else {
+            /**
+             * 为了保证拉取的数据在最上面，先倒叙，再插入，最后再倒叙
+             */
             Collections.reverse(newsModels);
             addDatas1(index);
             Collections.reverse(newsModels);
