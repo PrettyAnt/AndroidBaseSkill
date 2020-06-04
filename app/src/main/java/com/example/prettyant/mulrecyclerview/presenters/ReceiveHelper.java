@@ -48,7 +48,10 @@ public class ReceiveHelper {
              * 为了保证拉取的数据在最上面，先倒叙，再插入，最后再倒叙
              */
             Collections.reverse(newsModels);
+            newsModels2.clear();
             addDatas1(index);
+            Collections.reverse(newsModels2);
+            newsModels.addAll(newsModels2);
             Collections.reverse(newsModels);
         }
     }
@@ -137,17 +140,17 @@ public class ReceiveHelper {
     private void addDatas1(int index) {
         NewsModel newsModel = new NewsModel();
         newsModel.setNewsType(1);
-        newsModel.setTextContent("这是--->"+index);
-        newsModels.add(newsModel);
+        newsModel.setTextContent("1、这是--->"+index);
+        newsModels2.add(newsModel);
 
         NewsModel newsModel1 = new NewsModel();
         newsModel1.setNewsType(2);
-        newsModel1.setTextContent("加载--->"+index);
-        newsModels.add(newsModel1);
+        newsModel1.setTextContent("2、加载--->"+index);
+        newsModels2.add(newsModel1);
 
         NewsModel newsModel2 = new NewsModel();
         newsModel2.setNewsType(1);
-        newsModel2.setTextContent("新增的--->"+index);
-        newsModels.add(newsModel2);
+        newsModel2.setTextContent("3、新增的--->"+index);
+        newsModels2.add(newsModel2);
     }
 }
