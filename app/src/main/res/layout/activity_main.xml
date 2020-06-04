@@ -3,6 +3,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#BD9D8C"
     android:orientation="vertical">
 
     <TextView
@@ -11,28 +12,58 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:padding="10dp"
-        android:text="测试RecyclerView"
-        android:textColor="@color/colorAccent"/>
+        android:text="多类型Item的RecyclerView"
+        android:textColor="#0D0D12"/>
 
-    <Button
-        android:id="@+id/btn_back"
+    <TextView
+        android:id="@+id/tv_refresh"
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:layout_marginLeft="80dp"
+        android:layout_marginRight="80dp"
+        android:layout_marginBottom="6dp"
+        android:background="#49A0F6"
+        android:textColor="#fff"
+        android:gravity="center"
+        android:text="重新拉取数据"/>
+    <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="退出"/>
+        android:text="模拟微信WeChat聊天页面，下拉加载聊天消息"
+        android:textSize="12sp"
+        android:textColor="#fff"
+        android:layout_gravity="center"
+        android:gravity="center"/>
+
 
     <LinearLayout
+        android:id="@+id/ll_content"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="#fff"
         android:orientation="vertical">
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rv_country_recycle"
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:paddingLeft="10dp"
-            android:paddingRight="10dp"
             android:layout_height="0dp"
-            android:layout_gravity="center"
-            android:layout_weight="9"/>
+            android:layout_weight="9">
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rv_country_recycle"
+                android:layout_width="match_parent"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:layout_height="match_parent"/>
+
+            <ImageView
+                android:id="@+id/iv_loading"
+                android:layout_width="15dp"
+                android:layout_height="15dp"
+                android:layout_centerHorizontal="true"
+                android:visibility="invisible"
+                android:src="@drawable/loading"/>
+        </RelativeLayout>
+
 
         <TextView
             android:layout_width="match_parent"

@@ -5,6 +5,7 @@ import com.example.prettyant.mulrecyclerview.presenters.iview.OnLoadImp;
 import com.example.prettyant.mulrecyclerview.ui.MainActivity;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 /**
  * @author ChenYu
@@ -29,26 +30,36 @@ public class ReceiveHelper {
         return instant;
     }
 
-    public void loading(OnLoadImp onLoad) {
-        initData();
+    public void loading(OnLoadImp onLoad, int index) {
+        initData(index);
         onLoad.onReceive(newsModels);
     }
 
     /**
      * 造数据
      */
-    private void initData() {
-        newsModels.clear();
-        /**
-         * 0--富文本
-         * 1--只有文字
-         * 2--文字和图片
-         * 3--只有图片
-         * 4--只有视频
-         */
-        addDatas();
+    private void initData(int index) {
+        if (index == 0) {
+            newsModels.clear();
+            addDatas();
+            getMulDatas();
+        } else {
+            Collections.reverse(newsModels);
+            addDatas1(index);
+            Collections.reverse(newsModels);
+        }
+    }
 
-        for (int i = 0; i < 60; i++) {
+
+    /**
+     * 0--富文本
+     * 1--只有文字
+     * 2--文字和图片
+     * 3--只有图片
+     * 4--只有视频
+     */
+    private void getMulDatas() {
+        for (int i = 0; i < 10; i++) {
             switch (i % 5) {
                 case 0:
                     NewsModel newsModel = new NewsModel();
@@ -93,6 +104,8 @@ public class ReceiveHelper {
         }
     }
 
+    private ArrayList<NewsModel> newsModels2 = new ArrayList<>();
+
     /**
      * 造假数据
      */
@@ -111,6 +124,27 @@ public class ReceiveHelper {
         NewsModel newsModel2 = new NewsModel();
         newsModel2.setNewsType(1);
         newsModel2.setTextContent("点击 -->>打开日历选择器");
+        newsModels.add(newsModel2);
+    }
+
+    /**
+     * 造假数据
+     */
+
+    private void addDatas1(int index) {
+        NewsModel newsModel = new NewsModel();
+        newsModel.setNewsType(1);
+        newsModel.setTextContent("这是--->"+index);
+        newsModels.add(newsModel);
+
+        NewsModel newsModel1 = new NewsModel();
+        newsModel1.setNewsType(2);
+        newsModel1.setTextContent("加载--->"+index);
+        newsModels.add(newsModel1);
+
+        NewsModel newsModel2 = new NewsModel();
+        newsModel2.setNewsType(1);
+        newsModel2.setTextContent("新增的--->"+index);
         newsModels.add(newsModel2);
     }
 }
