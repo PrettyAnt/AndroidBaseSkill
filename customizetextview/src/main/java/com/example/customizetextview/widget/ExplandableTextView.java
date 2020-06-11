@@ -24,7 +24,7 @@ public class ExplandableTextView extends RelativeLayout implements View.OnClickL
     private TextView       tv_show;
     private RelativeLayout rl_loadmore, rl_item;
     private              int   height;
-    private static final float MAX_LINES = 3.5f;
+    private static final float MAX_LINES = 3.8f;
 
     public ExplandableTextView(Context context) {
         this(context, null);
