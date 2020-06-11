@@ -11,7 +11,7 @@
 * 自定义dialog等
 * 日历选择器
 * 自定义点击可展开的View
-![效果](https://github.com/PrettyAnt/AndroidBaseSkill/image/expland.gif)
+![效果](https://github.com/PrettyAnt/AndroidBaseSkill/blob/master/image/expland.gif)
 
 ...
     
