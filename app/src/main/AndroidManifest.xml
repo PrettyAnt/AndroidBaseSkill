@@ -16,8 +16,6 @@
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
-        <activity android:name="com.example.prettyant.demo3.TestActivity3"/>
-        <activity android:name="com.example.prettyant.demo4.TestActivity4"/>
     </application>
 
 </manifest>

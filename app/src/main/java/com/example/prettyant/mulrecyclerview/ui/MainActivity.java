@@ -20,6 +20,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.annointroduction.AnnotationActivity;
+import com.example.customizetextview.CustomizeTextActivity;
 import com.example.mvpstrategy.MvpStrategyActivity;
 import com.example.prettyant.R;
 import com.example.prettyant.mulrecyclerview.ItemOnClickListener;
@@ -41,7 +42,7 @@ import java.util.List;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener, ItemOnClickListener, OnLoadImp {
 
-    private TextView          btn_load_data;
+    private TextView        btn_load_data;
     private TextView        tv_show_msg;
     private RecyclerView    rv_recycle;
     private DataAdapter     dataAdapter;
@@ -88,7 +89,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             public void onScrollStateChanged(@NonNull RecyclerView recyclerView, int newState) {
                 Log.d("prettyant", "newState: " + newState);
                 int firstVisibleItemPosition = manager.findFirstVisibleItemPosition();
-                if (newState==0&& firstVisibleItemPosition == 0) {
+                if (newState == 0 && firstVisibleItemPosition == 0) {
                     loadingData();//模拟微信下拉加载效果
 
                 }
@@ -108,11 +109,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             handler.postDelayed(new Runnable() {
                 @Override
                 public void run() {
-                    ReceiveHelper.getInstance().loading(MainActivity.this,index);
+                    ReceiveHelper.getInstance().loading(MainActivity.this, index);
 
                     index++;
                 }
-            }, 1000l);
+            }, 500l);
 
         }
         isLoading = true;
@@ -120,8 +121,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     private int index = 0;
+
     private void initData() {
-        ReceiveHelper.getInstance().loading(this,index);
+        ReceiveHelper.getInstance().loading(this, index);
     }
 
     @Override
@@ -154,7 +156,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 });
                 break;
             case 3:
-
+                startActivity(new Intent(this, CustomizeTextActivity.class));
                 break;
             case 4:
 

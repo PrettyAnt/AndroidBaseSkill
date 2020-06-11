@@ -131,6 +131,10 @@ public class ReceiveHelper {
         newsModel2.setNewsType(1);
         newsModel2.setTextContent("点击 -->>打开日历选择器");
         newsModels.add(newsModel2);
+        NewsModel newsModel3 = new NewsModel();
+        newsModel3.setNewsType(1);
+        newsModel3.setTextContent("点击 -->>自定义textView");
+        newsModels.add(newsModel3);
     }
 
     /**
@@ -140,17 +144,17 @@ public class ReceiveHelper {
     private void addDatas1(int index) {
         NewsModel newsModel = new NewsModel();
         newsModel.setNewsType(1);
-        newsModel.setTextContent("1、这是--->"+index);
+        newsModel.setTextContent("1、点击 -->>跳转到 自定义dialog、mvp的简单实例"+index);
         newsModels2.add(newsModel);
 
         NewsModel newsModel1 = new NewsModel();
         newsModel1.setNewsType(2);
-        newsModel1.setTextContent("2、加载--->"+index);
+        newsModel1.setTextContent("2、点击打开 -->>注解原理"+index);
         newsModels2.add(newsModel1);
 
         NewsModel newsModel2 = new NewsModel();
         newsModel2.setNewsType(1);
-        newsModel2.setTextContent("3、新增的--->"+index);
+        newsModel2.setTextContent("3、点击 -->>打开日历选择器"+index);
         newsModels2.add(newsModel2);
     }
 }

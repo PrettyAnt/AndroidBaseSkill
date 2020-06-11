@@ -23,4 +23,5 @@ dependencies {
     implementation 'com.github.bumptech.glide:glide:3.7.0'
     implementation project(path: ':mvpstrategy')
     implementation project(path: ':annoIntroduction')
+    implementation project(path: ':customizetextview')
 }

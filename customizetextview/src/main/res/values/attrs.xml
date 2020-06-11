@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="ExplandableText">
+<!--        <attr name="prettyant_backgroud" format="reference" />-->
+        <attr name="prettyant_backgroud_width" format="dimension" />
+<!--        <attr name="prettyant_backgroud_height" format="dimension" />-->
+<!--        <attr name="prettyant_text" format="string" />-->
+<!--        <attr name="prettyant_text_color" format="color" />-->
+<!--        <attr name="prettyant_text_size" format="dimension" />-->
+
+    </declare-styleable>
+</resources>
