@@ -1,7 +1,6 @@
 package com.example.customizetextview.widget;
 
 import android.content.Context;
-import android.content.res.TypedArray;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,6 +8,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.example.customizetextview.R;
+
 
 /**
  * @author ChenYu
@@ -18,13 +18,11 @@ import com.example.customizetextview.R;
  * PackageName : com.example.customizetextview.widget
  * describle :
  */
-public class ExplandableTextView extends RelativeLayout implements View.OnClickListener {
+public class ExplandableTextView extends RelativeLayout {
     private Context        context;
-    private String         text;
     private TextView       tv_show;
     private RelativeLayout rl_loadmore, rl_item;
-    private              int   height;
-    private static final float MAX_LINES = 3.8f;
+    private static final float   MAX_LINES = 4f;
 
     public ExplandableTextView(Context context) {
         this(context, null);
@@ -36,6 +34,9 @@ public class ExplandableTextView extends RelativeLayout implements View.OnClickL
         this.context = context;
     }
 
+    public RelativeLayout getRl_loadmore() {
+        return rl_loadmore;
+    }
 
     public ExplandableTextView(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
@@ -46,51 +47,52 @@ public class ExplandableTextView extends RelativeLayout implements View.OnClickL
         tv_show = inflate.findViewById(R.id.tv_show);
         rl_item = inflate.findViewById(R.id.rl_item);
         rl_loadmore = inflate.findViewById(R.id.rl_loadmore);
-        rl_loadmore.setOnClickListener(this);
-        //加载自定义属性配置
-        TypedArray typedArray = context.obtainStyledAttributes(attrs, R.styleable.ExplandableText);
-        if (typedArray != null) {
-            int          width        = typedArray.getDimensionPixelSize(R.styleable.ExplandableText_prettyant_backgroud_width, 0);
-            LayoutParams layoutParams = (LayoutParams) rl_item.getLayoutParams();
-            layoutParams.width = width;
-            rl_item.setLayoutParams(layoutParams);
-            typedArray.recycle();
-        }
     }
 
+    /**
+     * 设置只显示3.5行
+     * @param text
+     */
     public void setHalfText(String text) {
-        this.text = text;
         tv_show.setText(text);
-        tv_show.post(new Runnable() {
-            @Override
-            public void run() {
-                height = tv_show.getHeight();
-                int lineCount = tv_show.getLineCount();
-                if (lineCount <= 3) {
-                    rl_loadmore.setVisibility(GONE);
-                } else {
-                    rl_loadmore.setVisibility(VISIBLE);
-                    int singleHeigh = height / lineCount;//每一行的高度
-                    tv_show.setHeight((int) (singleHeigh * MAX_LINES));
-                    LayoutParams layoutParams = (LayoutParams) rl_loadmore.getLayoutParams();
-                    layoutParams.setMargins(0, -singleHeigh / 2, 0, 0);
-                }
-
-            }
-        });
+        tv_show.post(runnable);
     }
 
-    private void setExplandText(String text) {
+
+    /**
+     * 设置显示全部
+     * @param text
+     */
+    public void setText(String text) {
         tv_show.setText(text);
-        tv_show.setHeight(height);
+        tv_show.setMaxLines(Integer.MAX_VALUE);
         rl_loadmore.setVisibility(GONE);
     }
 
 
     @Override
-    public void onClick(View v) {
-        if (v.getId() == R.id.rl_loadmore) {
-            setExplandText(text);
-        }
+    protected void onLayout(boolean changed, int l, int t, int r, int b) {
+        super.onLayout(changed, l, t, r, b);
     }
+
+    private Runnable runnable = new Runnable() {
+        @Override
+        public void run() {
+//            int height = tv_show.getHeight();
+            int   lineCount  = tv_show.getLineCount();
+            int   lineHeight = tv_show.getLineHeight();
+            float maxHeigh   = lineHeight * MAX_LINES;
+
+            if (lineCount < MAX_LINES) {
+                rl_loadmore.setVisibility(GONE);
+            } else {
+                rl_loadmore.setVisibility(VISIBLE);
+                //每一行的高度
+                tv_show.setHeight(Math.round(maxHeigh));
+                LayoutParams layoutParams = (LayoutParams) rl_loadmore.getLayoutParams();
+                layoutParams.setMargins(0, -lineHeight / 2, 0, 0);
+            }
+        }
+    };
+
 }

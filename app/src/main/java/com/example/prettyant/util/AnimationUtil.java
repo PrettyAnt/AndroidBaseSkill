@@ -1,7 +1,7 @@
 package com.example.prettyant.util;
 
-import android.view.View;
 import android.view.animation.Animation;
+import android.view.animation.LinearInterpolator;
 import android.view.animation.RotateAnimation;
 import android.widget.ImageView;
 
@@ -15,7 +15,9 @@ import android.widget.ImageView;
  */
 public class AnimationUtil {
     private static AnimationUtil instance;
-    public static AnimationUtil newInstance(){
+    private        Animation     rotate;
+
+    public static AnimationUtil newInstance() {
         if (instance == null) {
             synchronized (AnimationUtil.class) {
                 if (instance == null) {
@@ -25,11 +27,22 @@ public class AnimationUtil {
         }
         return instance;
     }
-    public void roateAnima(ImageView imageView){
-        imageView.setVisibility(View.VISIBLE);
-        Animation rotate = new RotateAnimation(0f, 180f, Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 0.5f);
+
+    public void startAnima(ImageView imageView) {
+        rotate = new RotateAnimation(0f, 360f, Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 0.5f);
         rotate.setDuration(1000);//设置动画持续周期
-        rotate.setFillAfter(false);//动画执行完后是否停留在执行完的状态
+//        rotate.setFillAfter(false);//动画执行完后是否停留在执行完的状态
+        rotate.setRepeatCount(Animation.INFINITE);
+        rotate.setRepeatMode(Animation.RESTART);
+        rotate.setInterpolator(new LinearInterpolator());
         imageView.startAnimation(rotate);
+
+    }
+
+    public void stopAnima() {
+        if (rotate == null) {
+            return;
+        }
+        rotate.cancel();
     }
 }

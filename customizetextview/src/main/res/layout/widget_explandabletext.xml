@@ -11,20 +11,22 @@
 
         <TextView
             android:id="@+id/tv_show"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="--"/>
+            android:layout_centerHorizontal="true"
+            android:text="--fwqtqtkq3ogkqokt43t "/>
 
         <RelativeLayout
             android:id="@+id/rl_loadmore"
             android:layout_below="@+id/tv_show"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/shap_background">
             <TextView
                 android:id="@+id/tv_loadmore"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
                 android:text="展开"
                 android:layout_marginTop="4dp"
                 android:gravity="center_horizontal"

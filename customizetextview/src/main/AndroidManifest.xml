@@ -3,5 +3,6 @@
 
     <application>
         <activity android:name=".CustomizeTextActivity" />
+        <activity android:name=".WebActivity" />
     </application>
 </manifest>

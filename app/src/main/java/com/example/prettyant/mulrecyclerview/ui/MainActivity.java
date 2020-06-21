@@ -104,13 +104,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private boolean isLoading = false;
 
     private void loadingData() {
-        AnimationUtil.newInstance().roateAnima(iv_loading);
+        AnimationUtil.newInstance().startAnima(iv_loading);
         if (!isLoading) {
             handler.postDelayed(new Runnable() {
                 @Override
                 public void run() {
                     ReceiveHelper.getInstance().loading(MainActivity.this, index);
-
+                    AnimationUtil.newInstance().stopAnima();
                     index++;
                 }
             }, 500l);

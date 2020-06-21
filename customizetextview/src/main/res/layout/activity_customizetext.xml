@@ -1,37 +1,49 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:prettyant="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:background="#FBFAFA">
+    android:background="#FBFAFA"
+    android:orientation="vertical">
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="点击展开的自定义View"
+        android:layout_marginTop="20dp"
         android:gravity="center"
-        android:layout_marginTop="20dp"/>
+        android:text="点击展开的自定义View" />
 
 
     <View
-        android:layout_marginTop="20dp"
-        android:layout_marginBottom="20dp"
         android:layout_width="match_parent"
         android:layout_height="6dp"
-        android:background="#ccc"/>
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="20dp"
+        android:background="#ccc" />
+
+    <TextView
+        android:id="@+id/tv_show"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:gravity="center_vertical"
+        android:paddingLeft="20dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="20dp"
+        android:text="SpannableString的一些用法"
+        android:textColor="#000" />
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent" >
-    <com.example.customizetextview.widget.ExplandableTextView
-        android:id="@+id/etv"
-        android:layout_centerHorizontal="true"
-        android:layout_width="320dp"
-        android:layout_height="wrap_content"
-        android:paddingBottom="20dp"
-        android:gravity="center"
-        android:background="@drawable/shap_main_background"
-        prettyant:prettyant_backgroud_width="240dp"/>
+        android:layout_height="match_parent">
+
+        <com.example.customizetextview.widget.ExplandableTextView
+            android:id="@+id/etv"
+            android:layout_width="240dp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/shap_main_background"
+            android:gravity="center"
+            android:paddingBottom="20dp" />
+
+
     </RelativeLayout>
+
 </LinearLayout>
