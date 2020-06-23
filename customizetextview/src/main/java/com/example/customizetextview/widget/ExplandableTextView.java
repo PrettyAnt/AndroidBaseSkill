@@ -23,6 +23,7 @@ public class ExplandableTextView extends RelativeLayout {
     private TextView       tv_show;
     private RelativeLayout rl_loadmore, rl_item;
     private static final float   MAX_LINES = 4f;
+    private int height;
 
     public ExplandableTextView(Context context) {
         this(context, null);
@@ -65,7 +66,10 @@ public class ExplandableTextView extends RelativeLayout {
      */
     public void setText(String text) {
         tv_show.setText(text);
-        tv_show.setMaxLines(Integer.MAX_VALUE);
+//        tv_show.setMaxLines(Integer.MAX_VALUE);
+        if (height >= 0) {
+            tv_show.setHeight(height);
+        }
         rl_loadmore.setVisibility(GONE);
     }
 
@@ -78,7 +82,7 @@ public class ExplandableTextView extends RelativeLayout {
     private Runnable runnable = new Runnable() {
         @Override
         public void run() {
-//            int height = tv_show.getHeight();
+            height = tv_show.getHeight();
             int   lineCount  = tv_show.getLineCount();
             int   lineHeight = tv_show.getLineHeight();
             float maxHeigh   = lineHeight * MAX_LINES;
