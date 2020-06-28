@@ -11,7 +11,7 @@ import android.text.style.ForegroundColorSpan;
 import android.text.style.UnderlineSpan;
 import android.util.Log;
 import android.view.View;
-import android.widget.RelativeLayout;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.Nullable;
@@ -28,9 +28,9 @@ public class CustomizeTextActivity extends AppCompatActivity implements View.OnC
             "建议问/相关问提示话术区域和建议问/相关问显示区域需要根据内容的多少调整模板区域大小①回复内容区" +
             "域的内容，需判断内容的行数是否大于3行，若大于3行，则显示3.5行内容以及“展开”按钮，第4行以外部分全部隐藏，②、③、④区域内容展现不变，效果图如下图，当点击“展开”按钮后则显示全部内容，并不再收起。";
 
-    private ExplandableTextView  etv;
-    private TextView             tv_show;
-    private RelativeLayout rl_loadmore;
+    private ExplandableTextView etv;
+    private TextView            tv_show;
+    private LinearLayout        ll_loadmore;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -47,13 +47,13 @@ public class CustomizeTextActivity extends AppCompatActivity implements View.OnC
 //    private String link = "好的 <font color='#FF00ff'>点击这里</font>";
     private void initView() {
         etv = (ExplandableTextView) findViewById(R.id.etv);
-        tv_show = (TextView) findViewById(R.id.tv_show);
+        tv_show = (TextView) findViewById(R.id.tv_half_show);
     }
 
     private void initEvent() {
         tv_show.setOnClickListener(this);
-        rl_loadmore = etv.getRl_loadmore();
-        rl_loadmore.setOnClickListener(this);
+        ll_loadmore = etv.getLl_loadmore();
+        ll_loadmore.setOnClickListener(this);
     }
 
     private void initData() {
@@ -113,9 +113,9 @@ public class CustomizeTextActivity extends AppCompatActivity implements View.OnC
 
     @Override
     public void onClick(View v) {
-        if (v.getId() == R.id.rl_loadmore) {
+        if (v.getId() == R.id.ll_loadmore) {
             etv.setText(testText);
-        } else if (v.getId() == R.id.tv_show) {
+        } else if (v.getId() == R.id.tv_half_show) {
             String urlString = getMatcher(link);
             Intent intent = new Intent(this, WebActivity.class);
             intent.putExtra("url", urlString);

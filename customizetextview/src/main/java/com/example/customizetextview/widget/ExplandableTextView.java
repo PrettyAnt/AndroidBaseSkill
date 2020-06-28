@@ -4,6 +4,7 @@ import android.content.Context;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -19,11 +20,13 @@ import com.example.customizetextview.R;
  * describle :
  */
 public class ExplandableTextView extends RelativeLayout {
-    private Context        context;
-    private TextView       tv_show;
-    private RelativeLayout rl_loadmore, rl_item;
-    private static final float   MAX_LINES = 4f;
-    private int height;
+    private              Context        context;
+    private              TextView       tv_show;
+    private              RelativeLayout rl_item;
+    private              LinearLayout   ll_loadmore;
+    private static final float          MAX_LINES = 4f;
+    private              int            height;
+    private              TextView       tv_total_show;
 
     public ExplandableTextView(Context context) {
         this(context, null);
@@ -35,8 +38,8 @@ public class ExplandableTextView extends RelativeLayout {
         this.context = context;
     }
 
-    public RelativeLayout getRl_loadmore() {
-        return rl_loadmore;
+    public LinearLayout getLl_loadmore() {
+        return ll_loadmore;
     }
 
     public ExplandableTextView(Context context, AttributeSet attrs, int defStyleAttr) {
@@ -45,13 +48,15 @@ public class ExplandableTextView extends RelativeLayout {
         View inflate = LayoutInflater
                 .from(context)
                 .inflate(R.layout.widget_explandabletext, this);
-        tv_show = inflate.findViewById(R.id.tv_show);
+        tv_show = inflate.findViewById(R.id.tv_half_show);
+        tv_total_show = inflate.findViewById(R.id.tv_total_show);
         rl_item = inflate.findViewById(R.id.rl_item);
-        rl_loadmore = inflate.findViewById(R.id.rl_loadmore);
+        ll_loadmore = inflate.findViewById(R.id.ll_loadmore);
     }
 
     /**
      * 设置只显示3.5行
+     *
      * @param text
      */
     public void setHalfText(String text) {
@@ -62,6 +67,7 @@ public class ExplandableTextView extends RelativeLayout {
 
     /**
      * 设置显示全部
+     *
      * @param text
      */
     public void setText(String text) {
@@ -70,7 +76,7 @@ public class ExplandableTextView extends RelativeLayout {
         if (height >= 0) {
             tv_show.setHeight(height);
         }
-        rl_loadmore.setVisibility(GONE);
+        ll_loadmore.setVisibility(GONE);
     }
 
 
@@ -83,18 +89,19 @@ public class ExplandableTextView extends RelativeLayout {
         @Override
         public void run() {
             height = tv_show.getHeight();
-            int   lineCount  = tv_show.getLineCount();
-            int   lineHeight = tv_show.getLineHeight();
-            float maxHeigh   = lineHeight * MAX_LINES;
-
+            int   lineCount     = tv_show.getLineCount();//行数
+            int   lineHeight    = tv_show.getLineHeight();//行高
+            float textSize      = tv_show.getPaint().getTextSize();//字体的高度
+            int distance = (int) ((lineHeight - textSize) / 2 + textSize);//向上平移的距离
+            float maxHeigh      = lineHeight * MAX_LINES;
             if (lineCount < MAX_LINES) {
-                rl_loadmore.setVisibility(GONE);
+                ll_loadmore.setVisibility(GONE);
             } else {
-                rl_loadmore.setVisibility(VISIBLE);
+                ll_loadmore.setVisibility(VISIBLE);
                 //每一行的高度
                 tv_show.setHeight(Math.round(maxHeigh));
-                LayoutParams layoutParams = (LayoutParams) rl_loadmore.getLayoutParams();
-                layoutParams.setMargins(0, -lineHeight / 2, 0, 0);
+                LayoutParams layoutParams = (LayoutParams) ll_loadmore.getLayoutParams();
+                layoutParams.setMargins(0, -distance, 0, 0);
             }
         }
     };

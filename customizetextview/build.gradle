@@ -23,9 +23,6 @@ android {
 
 dependencies {
     implementation 'androidx.appcompat:appcompat:1.1.0'
-    compileOnly(name: 'refresh-release', ext: 'aar')
-    compileOnly(name: 'smarttablayout-library-1.6.1', ext: 'aar')
-    compileOnly(name: 'smarttablayout-utils-v4-1.6.1', ext: 'aar')
 }
 repositories {
     flatDir {

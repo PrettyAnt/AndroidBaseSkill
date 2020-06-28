@@ -52,9 +52,9 @@ public class ExplandableTextView2 extends RelativeLayout implements View.OnClick
         View inflate = LayoutInflater
                 .from(context)
                 .inflate(R.layout.widget_explandabletext, this);
-        tv_show = inflate.findViewById(R.id.tv_show);
+        tv_show = inflate.findViewById(R.id.tv_half_show);
         rl_item = inflate.findViewById(R.id.rl_item);
-        rl_loadmore = inflate.findViewById(R.id.rl_loadmore);
+        rl_loadmore = inflate.findViewById(R.id.ll_loadmore);
         rl_loadmore.setOnClickListener(this);
     }
 
@@ -66,7 +66,7 @@ public class ExplandableTextView2 extends RelativeLayout implements View.OnClick
     }
     @Override
     public void onClick(View v) {
-        if (v.getId() == R.id.rl_loadmore) {
+        if (v.getId() == R.id.ll_loadmore) {
             flag = false;
             requestLayout();
         }
