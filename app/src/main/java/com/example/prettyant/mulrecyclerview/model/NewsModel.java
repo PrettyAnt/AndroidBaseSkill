@@ -15,10 +15,11 @@ public class NewsModel {
      * 2 只有文字和图片
      * 3 只有视频
      */
-    private int newsType;
+    private int    newsType;
     private String textContent;//消息内容
     private String imgUrl;//图片链接
     private String videoUrl;//视频链接
+    private int    textSize;//文字大小
 
     public int getNewsType() {
         return newsType;
@@ -50,5 +51,13 @@ public class NewsModel {
 
     public void setVideoUrl(String videoUrl) {
         this.videoUrl = videoUrl;
+    }
+
+    public int getTextSize() {
+        return textSize;
+    }
+
+    public void setTextSize(int textSize) {
+        this.textSize = textSize;
     }
 }

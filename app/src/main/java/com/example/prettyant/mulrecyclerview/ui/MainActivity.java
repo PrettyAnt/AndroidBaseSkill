@@ -30,6 +30,7 @@ import com.example.prettyant.mulrecyclerview.presenters.iview.OnLoadImp;
 import com.example.prettyant.mulrecyclerview.ui.adapter.DataAdapter;
 import com.example.prettyant.util.AnimationUtil;
 import com.example.prettyant.util.DialogHelper;
+import com.example.raudiomodule.RaudioActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -159,7 +160,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 startActivity(new Intent(this, CustomizeTextActivity.class));
                 break;
             case 4:
-
+                startActivity(new Intent(this, RaudioActivity.class));
                 break;
         }
     }

@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="#00FFFFFF">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="50dp"
+        android:background="@drawable/shap_queue"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/tv_queue_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="正在为您接入人工服务"
+            android:layout_marginTop="80dp"
+            android:gravity="center_horizontal"
+            android:textColor="#595656"
+            android:textSize="13sp"/>
+        <TextView
+            android:id="@+id/tv_queue_content"
+            android:layout_width="180dp"
+            android:layout_height="wrap_content"
+            android:text="您前面还有7位顾客正在等候服务，请耐心等待"
+            android:layout_marginTop="10dp"
+            android:gravity="center_horizontal"
+            android:layout_gravity="center_horizontal"
+            android:textColor="#000"
+            android:textSize="16sp"/>
+
+        <ImageView
+            android:id="@+id/iv_queue_exit"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="10dp"
+            android:background="#F00"/>
+
+        <TextView
+            android:id="@+id/tv_queue_tip"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:text="退出排队"/>
+    </LinearLayout>
+
+    <ImageView
+        android:id="@+id/iv_queue_icon"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_centerHorizontal="true"
+        android:background="#F00"/>
+
+
+</RelativeLayout>

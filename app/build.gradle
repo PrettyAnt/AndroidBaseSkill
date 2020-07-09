@@ -24,6 +24,7 @@ dependencies {
     implementation project(path: ':mvpstrategy')
     implementation project(path: ':annoIntroduction')
     implementation project(path: ':customizetextview')
+    implementation project(path: ':raudiomodule')
 }
 repositories {
     flatDir {

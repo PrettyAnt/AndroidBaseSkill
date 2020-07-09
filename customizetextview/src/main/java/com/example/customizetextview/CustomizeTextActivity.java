@@ -10,14 +10,18 @@ import android.text.Spanned;
 import android.text.style.ForegroundColorSpan;
 import android.text.style.UnderlineSpan;
 import android.util.Log;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.LinearLayout;
+import android.widget.PopupWindow;
 import android.widget.TextView;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.customizetextview.widget.ExplandableTextView;
+import com.example.customizetextview.widget.QueuePopWindow;
+import com.example.customizetextview.widget.SingleQueueDialog;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -114,7 +118,9 @@ public class CustomizeTextActivity extends AppCompatActivity implements View.OnC
     @Override
     public void onClick(View v) {
         if (v.getId() == R.id.ll_loadmore) {
-            etv.setText(testText);
+//            etv.setText(testText);
+//            PopupWindow popupWindow = QueuePopWindow.getInstance().showBottomPop(ll_loadmore, this);
+            SingleQueueDialog.getInstance().showQueueDialog(this);
         } else if (v.getId() == R.id.tv_half_show) {
             String urlString = getMatcher(link);
             Intent intent = new Intent(this, WebActivity.class);
@@ -122,4 +128,5 @@ public class CustomizeTextActivity extends AppCompatActivity implements View.OnC
             startActivity(intent);
         }
     }
+
 }
