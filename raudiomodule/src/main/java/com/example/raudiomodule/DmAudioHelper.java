@@ -2,40 +2,38 @@ package com.example.raudiomodule;
 
 import android.content.Context;
 import android.media.AudioManager;
-import android.os.Bundle;
-import android.view.View;
-import android.widget.Button;
 
-import androidx.appcompat.app.AppCompatActivity;
+/**
+ * @author ChenYu
+ * My personal blog  https://prettyant.github.io
+ * <p>
+ * Created on 3:35 PM  2020/8/5
+ * PackageName : com.example.spdbsoappandroid.util
+ * describle :
+ */
+public class DmAudioHelper {
+    private static DmAudioHelper instance;
+    private        AudioManager  audioManager;
 
-public class RaudioActivity extends AppCompatActivity implements View.OnClickListener {
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_raudio);
-        initView();
+    public static DmAudioHelper getInstance() {
+        if (instance == null) {
+            synchronized (DmAudioHelper.class) {
+                if (instance == null) {
+                    instance = new DmAudioHelper();
+                }
+            }
+        }
+        return instance;
     }
 
-    private void initView() {
-        Button button  = (Button) findViewById(R.id.button);
-        Button button2 = (Button) findViewById(R.id.button2);
-        Button button3 = (Button) findViewById(R.id.button3);
-        button.setOnClickListener(this);
-        button2.setOnClickListener(this);
-        button3.setOnClickListener(this);
-
-    }
-
-    private boolean      isRequested = false;
-    private AudioManager audioManager;
+    private  boolean isRequested = false;
 
     /**
      * @param context
-     * @param flag    0，1    1 表示降低外部音量
+     * @param flag    0，1   0暂停外部音乐 1 表示降低外部音量
      */
-    public void requestAudioFocus(Context context, int flag) {
-        LogUtil.warnLog(LogUtil.logStaus, "-------------------声音开始------------------");
+    public  void requestAudioFocus(Context context, int flag) {
+        LogUtil.warnLog(LogUtil.logStaus, "------------------->>>  外部音乐 "+flag);
         if (audioManager == null) {
             audioManager = (AudioManager) context.getSystemService(Context.AUDIO_SERVICE);
         }
@@ -44,20 +42,23 @@ public class RaudioActivity extends AppCompatActivity implements View.OnClickLis
             if (flag == 0) {
                 durationHint = AudioManager.AUDIOFOCUS_GAIN_TRANSIENT;
             }
-//            durationHint = AudioManager.AUDIOFOCUS_GAIN_TRANSIENT_MAY_DUCK;
             audioManager.requestAudioFocus(onAudioFocusChangeListener, AudioManager.STREAM_MUSIC, durationHint);
             isRequested = true;
         }
     }
 
-    public void abandonAudioFocus() {
+    /**
+     * 取消状态
+     */
+    public  void abandonAudioFocus() {
+        LogUtil.warnLog(LogUtil.logStaus, "------------------->>>  外部音乐恢复");
         if (audioManager != null && isRequested) {
             isRequested = false;
             audioManager.abandonAudioFocus(onAudioFocusChangeListener);
         }
     }
 
-    protected AudioManager.OnAudioFocusChangeListener onAudioFocusChangeListener = new AudioManager.OnAudioFocusChangeListener() {
+    protected static AudioManager.OnAudioFocusChangeListener onAudioFocusChangeListener = new AudioManager.OnAudioFocusChangeListener() {
         @Override
         public void onAudioFocusChange(int focusChange) {
             switch (focusChange) {
@@ -80,17 +81,5 @@ public class RaudioActivity extends AppCompatActivity implements View.OnClickLis
         }
     };
 
-    @Override
-    public void onClick(View v) {
-        if (v.getId() == R.id.button) {
-//            requestAudioFocus(this, 1);
-            DmAudioHelper.getInstance().requestAudioFocus(this, 1);
-        } else if (v.getId() == R.id.button2) {
-//            requestAudioFocus(this, 0);
-            DmAudioHelper.getInstance().requestAudioFocus(this, 0);
-        } else if (v.getId() == R.id.button3) {
-//            abandonAudioFocus();
-            DmAudioHelper.getInstance().abandonAudioFocus();
-        }
-    }
+
 }
