@@ -2,14 +2,6 @@ package com.example.prettyant.mulrecyclerview.ui;
 
 import android.content.Intent;
 import android.os.Bundle;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
 import android.os.Handler;
 import android.util.Log;
 import android.view.View;
@@ -18,6 +10,11 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.annointroduction.AnnotationActivity;
 import com.example.customizetextview.CustomizeTextActivity;
@@ -28,6 +25,7 @@ import com.example.prettyant.mulrecyclerview.model.NewsModel;
 import com.example.prettyant.mulrecyclerview.presenters.ReceiveHelper;
 import com.example.prettyant.mulrecyclerview.presenters.iview.OnLoadImp;
 import com.example.prettyant.mulrecyclerview.ui.adapter.DataAdapter;
+import com.example.prettyant.mulrecyclerview.ui.widget.RecyclerScrollListener;
 import com.example.prettyant.util.AnimationUtil;
 import com.example.prettyant.util.DialogHelper;
 import com.example.raudiomodule.RaudioActivity;
@@ -41,15 +39,16 @@ import java.util.List;
  * Author'github https://github.com/PrettyAnt
  */
 
-public class MainActivity extends AppCompatActivity implements View.OnClickListener, ItemOnClickListener, OnLoadImp {
+public class MainActivity extends AppCompatActivity implements View.OnClickListener, ItemOnClickListener, OnLoadImp, RecyclerScrollListener.ScrollListener {
 
-    private TextView        btn_load_data;
-    private TextView        tv_show_msg;
-    private RecyclerView    rv_recycle;
-    private DataAdapter     dataAdapter;
-    private List<NewsModel> newsModels = new ArrayList<>();
-    private LinearLayout    ll_content;
-    private ImageView       iv_loading;
+    private TextView            btn_load_data;
+    private TextView            tv_show_msg;
+    private RecyclerView        rv_recycle;
+    private DataAdapter         dataAdapter;
+    private List<NewsModel>     newsModels = new ArrayList<>();
+    private LinearLayout        ll_content;
+    private ImageView           iv_loading;
+    private LinearLayoutManager linearLayoutManager;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -73,32 +72,16 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private void initEvent() {
         btn_load_data.setOnClickListener(this);
         //设置布局管理器  spanCount==1时，GridLayoutManager布局管理器就类似于LinearLayoutManager
-        final GridLayoutManager manager = new GridLayoutManager(this, 1, LinearLayoutManager.VERTICAL, false);
+//        final GridLayoutManager manager = new GridLayoutManager(this, 1, LinearLayoutManager.VERTICAL, false);
+        linearLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
 //        StaggeredGridLayoutManager manager = new StaggeredGridLayoutManager(4, StaggeredGridLayoutManager.VERTICAL); //流布局
-        rv_recycle.setLayoutManager(manager);
+        rv_recycle.setLayoutManager(linearLayoutManager);
         dataAdapter = new DataAdapter(newsModels, this);
         rv_recycle.setAdapter(dataAdapter);
         dataAdapter.setItemOnClickListener(this);
-        rv_recycle.addOnScrollListener(new RecyclerView.OnScrollListener() {
-            @Override
-            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
-                super.onScrolled(recyclerView, dx, dy);
-            }
-        });
-        rv_recycle.addOnScrollListener(new RecyclerView.OnScrollListener() {
-            @Override
-            public void onScrollStateChanged(@NonNull RecyclerView recyclerView, int newState) {
-                Log.d("prettyant", "newState: " + newState);
-                int firstVisibleItemPosition = manager.findFirstVisibleItemPosition();
-                if (newState == 0 && firstVisibleItemPosition == 0) {
-                    loadingData();//模拟微信下拉加载效果
-
-                }
-
-                super.onScrollStateChanged(recyclerView, newState);
-            }
-
-        });
+        RecyclerScrollListener recyclerScrollListener = new RecyclerScrollListener();
+        recyclerScrollListener.setScrollListener(this);
+        rv_recycle.addOnScrollListener(recyclerScrollListener);
     }
 
     private Handler handler   = new Handler();
@@ -172,5 +155,20 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         dataAdapter.notifyDataSetChanged();
         iv_loading.setVisibility(View.INVISIBLE);
         isLoading = false;
+    }
+
+    @Override
+    public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
+        Log.d("prettyant", "newState: " + newState);
+        int firstVisibleItemPosition = linearLayoutManager.findFirstVisibleItemPosition();
+        if (newState == 0 && firstVisibleItemPosition == 0) {
+            loadingData();//模拟微信下拉加载效果
+
+        }
+    }
+
+    @Override
+    public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+
     }
 }
